@@ -225,7 +225,7 @@ public class ServiceManager
             }
             catch ( Exception e )
             {
-                Log.error( "Unable to persists service ({} at {}) in database!", service.getType(), service.getHost(), e );
+                Log.error( "Unable to persists service ({} at {}) in database!", new Object[]{service.getType(), service.getHost()}, e );
                 services.remove( service );
             }
             finally
@@ -257,7 +257,7 @@ public class ServiceManager
         }
         catch ( Exception e )
         {
-            Log.error( "Unable to remove service ({} at {}) from database!", service.getType(), service.getHost(), e );
+            Log.error( "Unable to remove service ({} at {}) from database!", new Object[]{service.getType(), service.getHost()}, e );
         }
         finally
         {
@@ -284,7 +284,7 @@ public class ServiceManager
             }
             catch ( Exception e )
             {
-                Log.warn( "Unable to obtain credentials for requester '{}', for the {} service at: {}", requester, service.getType(), service.getHost(), e );
+                Log.warn( "Unable to obtain credentials for requester '{}', for the {} service at: {}", new Object[]{requester, service.getType(), service.getHost()}, e );
             }
         }
 
@@ -307,7 +307,7 @@ public class ServiceManager
                 }
                 catch ( Exception e )
                 {
-                    Log.warn( "Unable to obtain credentials for requester '{}', for the {} service at: {}", requester, service.getType(), service.getHost(), e );
+                    Log.warn( "Unable to obtain credentials for requester '{}', for the {} service at: {}", new Object[]{requester, service.getType(), service.getHost()}, e );
                 }
             }
         }
@@ -317,7 +317,7 @@ public class ServiceManager
 
     public Map<Service, Credentials> getServicesFor( JID requester, String requestedHost, String requestedType )
     {
-        Log.debug( "Obtaining credentials for {} on {} of type {}", requester, requestedHost, requestedType );
+        Log.debug( "Obtaining credentials for {} on {} of type {}", new Object[]{requester, requestedHost, requestedType} );
 
         final Map<Service, Credentials> result = new HashMap<>();
         for ( final Service service : services )
@@ -332,7 +332,7 @@ public class ServiceManager
                 }
                 catch ( Exception e )
                 {
-                    Log.warn( "Unable to obtain credentials for requester '{}', for the {} service at: {}", requester, service.getType(), service.getHost(), e );
+                    Log.warn( "Unable to obtain credentials for requester '{}', for the {} service at: {}", new Object[]{requester, service.getType(), service.getHost()}, e );
                 }
             }
         }
@@ -342,7 +342,7 @@ public class ServiceManager
 
     public Map<Service, Credentials> getServicesFor( JID requester, String requestedHost, String requestedType, int requestedPort )
     {
-        Log.debug( "Obtaining credentials for {} on {}:{} of type {}", requester, requestedHost, requestedPort, requestedType );
+        Log.debug( "Obtaining credentials for {} on {}:{} of type {}", new Object[]{requester, requestedHost, requestedPort, requestedType} );
         final Map<Service, Credentials> result = new HashMap<>();
         for ( final Service service : services )
         {
@@ -357,7 +357,7 @@ public class ServiceManager
                 }
                 catch ( Exception e )
                 {
-                    Log.warn( "Unable to obtain credentials for requester '{}', for the {} service at: {}:{}", requester, requestedType, requestedHost, requestedPort, e );
+                    Log.warn( "Unable to obtain credentials for requester '{}', for the {} service at: {}:{}", new Object[]{requester, requestedType, requestedHost, requestedPort}, e );
                 }
             }
         }

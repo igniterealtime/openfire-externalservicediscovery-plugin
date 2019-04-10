@@ -5,7 +5,7 @@
     <parent>
         <artifactId>plugins</artifactId>
         <groupId>org.igniterealtime.openfire</groupId>
-        <version>4.3.0-beta</version>
+        <version>4.3.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -15,6 +15,15 @@
 
     <name>External Service Discovery Plugin</name>
     <description>Openfire plugin that implements XEP-0215: External Service Discovery, allowing XMPP entities to discover services external to the XMPP network.</description>
+
+    <repositories>
+        <!-- Where we obtain dependencies. -->
+        <repository>
+            <id>igniterealtime</id>
+            <name>Ignite Realtime Repository</name>
+            <url>https://igniterealtime.org/archiva/repository/maven/</url>
+        </repository>
+    </repositories>
 
     <build>
         <sourceDirectory>src/java</sourceDirectory>
@@ -27,18 +36,20 @@
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-jspc-maven-plugin</artifactId>
+                <!-- Force the Openfire 4.2.x compatible version of JSP -->
+                <version>9.2.14.v20151106</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.igniterealtime.openfire</groupId>
+                        <artifactId>xmppserver</artifactId>
+                        <version>${openfire.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
 
     <dependencies>
-        <!-- Versions of Openfire up to 4.2.1 included an older slf4j-api artifact (1.6.6). Fixating the dependency. -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.25</version>
-        </dependency>
-
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -48,7 +59,7 @@
         <dependency>
             <groupId>nl.jqno.equalsverifier</groupId>
             <artifactId>equalsverifier</artifactId>
-            <version>3.0</version>
+            <version>3.1.8</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
