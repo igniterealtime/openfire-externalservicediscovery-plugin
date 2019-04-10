@@ -331,7 +331,7 @@ public final class Service
             }
             catch ( InvalidKeyException | NoSuchAlgorithmException e )
             {
-                Log.warn( "Unable to create ephemeral credentials for '{}' on {}:{}", user, host, port, e );
+                Log.warn( "Unable to create ephemeral credentials for '{}' on {}:{}", new Object[]{user, host, port}, e );
                 return null;
             }
 

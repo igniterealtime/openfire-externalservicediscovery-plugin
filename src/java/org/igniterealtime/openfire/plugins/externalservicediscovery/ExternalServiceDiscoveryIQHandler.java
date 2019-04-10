@@ -175,12 +175,12 @@ public abstract class ExternalServiceDiscoveryIQHandler extends IQHandler implem
         final Map<Service, Credentials> services;
         if ( requestedPort == null )
         {
-            Log.debug( "Handling request for credentials by {} for the {} service: {}", request.getFrom(), requestedType, requestedHost );
+            Log.debug( "Handling request for credentials by {} for the {} service: {}", new Object[]{request.getFrom(), requestedType, requestedHost} );
             services = serviceManager.getServicesFor( request.getFrom(), requestedHost, requestedType );
         }
         else
         {
-            Log.debug( "Handling request for credentials by {} for the {} service: {}:{}", request.getFrom(), requestedType, requestedHost, requestedPort);
+            Log.debug( "Handling request for credentials by {} for the {} service: {}:{}", new Object[]{request.getFrom(), requestedType, requestedHost, requestedPort});
             services = serviceManager.getServicesFor( request.getFrom(), requestedHost, requestedType, requestedPort );
         }
 
