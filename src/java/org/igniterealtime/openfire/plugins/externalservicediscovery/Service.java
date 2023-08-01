@@ -312,7 +312,7 @@ public final class Service
                 {
                     // Although RFC 5389 appears to allow for unescaped JIDs to be used as TURN usernames, problems have
                     // been reported (eg: https://github.com/versatica/JsSIP/issues/184)111
-                    username = URLEncoder.encode( user.toBareJID(), "ASCII" ) + ":" + asSecondsSinceEpoch;
+                    username = asSecondsSinceEpoch + ":" + URLEncoder.encode( user.toBareJID(), "ASCII" );
                 }
                 catch ( UnsupportedEncodingException e )
                 {
