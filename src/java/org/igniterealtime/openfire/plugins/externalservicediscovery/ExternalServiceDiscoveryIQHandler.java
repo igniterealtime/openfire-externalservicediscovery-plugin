@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Ignite Realtime Foundation. All rights reserved.
+ * Copyright (C) 2017-2024 Ignite Realtime Foundation. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -186,12 +186,15 @@ public abstract class ExternalServiceDiscoveryIQHandler extends IQHandler implem
 
         // Formulate response.
         final IQ response = IQ.createResultIQ( request );
-        final Element childElement = response.setChildElement( "credentials", request.getChildElement().getNamespaceURI() );
-        for ( final Map.Entry<Service, Credentials> service : services.entrySet() )
-        {
-            addServiceXml( childElement, service.getKey(), null, service.getValue() );
+        if (services.isEmpty()) {
+            Log.debug( "Returning error: Unable to find matching service for request for credentials by {} for the {} service: {}:{}", new Object[]{request.getFrom(), requestedType, requestedHost, requestedPort});
+            response.setError(new PacketError(PacketError.Condition.item_not_found, PacketError.Condition.item_not_found.getDefaultType(), "No service found for the provided input values."));
+        } else {
+            final Element childElement = response.setChildElement("credentials", request.getChildElement().getNamespaceURI());
+            for (final Map.Entry<Service, Credentials> service : services.entrySet()) {
+                addServiceXml(childElement, service.getKey(), null, service.getValue());
+            }
         }
-
         return response;
     }
 
